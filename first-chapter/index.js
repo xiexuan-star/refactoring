@@ -11,7 +11,7 @@ function amountFor(aPerformance) {
         result += 1000 * (aPerformance.audience - 30);
       }
       break;
-    case "comedy"  :
+    case "comedy":
       result = 30000;
       if (aPerformance.audience > 20) {
         result += 10000 + 400 * (aPerformance.audience - 20);
@@ -28,6 +28,13 @@ function playFor(aPerformance) {
   return plays[aPerformance.playId];
 }
 
+function volumeCreditsFor(aPerformance) {
+  let result = 0;
+  result += Math.max(aPerformance.audience - 30, 0);
+  if ("comedy" === playFor(aPerformance).type) result += Math.floor(aPerformance.audience / 5);
+  return result;
+}
+
 /**
  * @param {{customer:string,performance:{playId:string,audience:number}[]}} invoice
  * @param {Record<string,Record<'name'|'type',string>>} plays
@@ -40,17 +47,11 @@ export function statement(invoice, plays) {
   const { format } = new Intl.NumberFormat("en-US", { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
 
   for (const perf of invoice.performance) {
-    const thisAmount = amountFor(perf);
-
-    // add volume credits
-    volumeCredits += Math.max(perf.audience - 30, 0);
-
-    // add extra credit for every the comedy attendees
-    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+    volumeCredits += volumeCreditsFor(perf);
 
     // print
-    result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
-    totalAmount += thisAmount;
+    result += `  ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+    totalAmount += amountFor(perf);
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
