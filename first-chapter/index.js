@@ -1,6 +1,29 @@
 import { invoices } from './invoices.js';
 import { plays } from './plays.js';
 
+function amountFor(perf, play) {
+  let thisAmount = 0;
+
+  switch (play.type) {
+    case "tragedy":
+      thisAmount = 40000;
+      if (perf.audience > 30) {
+        thisAmount += 1000 * (perf.audience - 30);
+      }
+      break;
+    case "comedy"  :
+      thisAmount = 30000;
+      if (perf.audience > 20) {
+        thisAmount += 10000 + 400 * (perf.audience - 20);
+      }
+      thisAmount += 300 * perf.audience;
+      break;
+    default:
+      throw new Error('error');
+  }
+  return thisAmount;
+}
+
 /**
  * @param {{customer:string,performance:{playId:string,audience:number}[]}} invoice
  * @param {Record<string,Record<'name'|'type',string>>} plays
@@ -14,25 +37,7 @@ export function statement(invoice, plays) {
 
   for (const perf of invoice.performance) {
     const play = plays[perf.playId];
-    let thisAmount = 0;
-
-    switch (play.type) {
-      case "tragedy":
-        thisAmount = 40000;
-        if (perf.audience > 30) {
-          thisAmount += 1000 * (perf.audience - 30);
-        }
-        break;
-      case "comedy"  :
-        thisAmount = 30000;
-        if (perf.audience > 20) {
-          thisAmount += 10000 + 400 * (perf.audience - 20);
-        }
-        thisAmount += 300 * perf.audience;
-        break;
-      default:
-        throw new Error('error');
-    }
+    const thisAmount = amountFor(perf, play);
 
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
