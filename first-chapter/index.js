@@ -1,27 +1,31 @@
 import { invoices } from './invoices.js';
 import { plays } from './plays.js';
 
-function amountFor(perf, play) {
-  let thisAmount = 0;
+function amountFor(aPerformance) {
+  let result = 0;
 
-  switch (play.type) {
+  switch (playFor(aPerformance).type) {
     case "tragedy":
-      thisAmount = 40000;
-      if (perf.audience > 30) {
-        thisAmount += 1000 * (perf.audience - 30);
+      result = 40000;
+      if (aPerformance.audience > 30) {
+        result += 1000 * (aPerformance.audience - 30);
       }
       break;
     case "comedy"  :
-      thisAmount = 30000;
-      if (perf.audience > 20) {
-        thisAmount += 10000 + 400 * (perf.audience - 20);
+      result = 30000;
+      if (aPerformance.audience > 20) {
+        result += 10000 + 400 * (aPerformance.audience - 20);
       }
-      thisAmount += 300 * perf.audience;
+      result += 300 * aPerformance.audience;
       break;
     default:
       throw new Error('error');
   }
-  return thisAmount;
+  return result;
+}
+
+function playFor(aPerformance) {
+  return plays[aPerformance.playId];
 }
 
 /**
@@ -36,17 +40,16 @@ export function statement(invoice, plays) {
   const { format } = new Intl.NumberFormat("en-US", { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
 
   for (const perf of invoice.performance) {
-    const play = plays[perf.playId];
-    const thisAmount = amountFor(perf, play);
+    const thisAmount = amountFor(perf);
 
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
 
     // add extra credit for every the comedy attendees
-    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
     // print
-    result += `  ${play.name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
+    result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
     totalAmount += thisAmount;
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
