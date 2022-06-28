@@ -1,0 +1,33 @@
+{
+  "name": "refactoring",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiexuan-star/refactoring.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiexuan-star/refactoring/issues"
+  },
+  "homepage": "https://github.com/xiexuan-star/refactoring#readme",
+  "dependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "babel-jest": "^28.1.1",
+    "jest": "^28.1.1",
+    "lodash-es": "^4.17.21"
+  }
+}
