@@ -1,7 +1,6 @@
 class PerformanceCalculator {
-  constructor(aPerformance, aPlay) {
+  constructor(aPerformance) {
     this.aPerformance = aPerformance;
-    this.aPlay = aPlay;
   }
 
   /**
@@ -47,10 +46,10 @@ class ComedyCalculator extends PerformanceCalculator {
 function createPerformanceCalculator(aPerformance, aPlay) {
   switch (aPlay.type) {
     case 'tragedy':
-      return new TragedyCalculator(aPerformance, aPlay);
+      return new TragedyCalculator(aPerformance);
 
     case 'comedy':
-      return new ComedyCalculator(aPerformance, aPlay);
+      return new ComedyCalculator(aPerformance);
     default :
       throw new Error('unknown play type' + aPlay.type);
   }
