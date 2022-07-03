@@ -1,8 +1,17 @@
+export function statement(invoice, plays) {
+  /**
+   * @type {Record<string,any>}
+   */
+  const statementData = {};
+  return renderPlainText(statementData, invoice, plays);
+}
+
 /**
+ * @param {Record<string,any>} data
  * @param {{customer:string,performance:{playId:string,audience:number}[]}} invoice
  * @param {Record<string,Record<'name'|'type',string>>} plays
  */
-export function statement(invoice, plays) {
+function renderPlainText(data, invoice, plays) {
 
   let result = `Statement for ${invoice.customer}\n`;
   for (const perf of invoice.performance) {
