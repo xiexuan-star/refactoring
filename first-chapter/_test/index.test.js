@@ -2,7 +2,7 @@ import { htmlStatement, statement } from '../statement.js';
 import { invoices } from '../data/invoices.js';
 import { plays } from '../data/plays.js';
 
-test('correct statement', () => {
+test('statement', () => {
   expect(statement(invoices[0], plays)).toBe(
     `Statement for BigCo
   Hamlet: $650.00 (55 seats)
@@ -13,7 +13,7 @@ You earned 47 credits
 `);
 });
 
-test('correct HtmlStatement', () => {
+test('HtmlStatement', () => {
   console.log(htmlStatement(invoices[0], plays));
   expect(htmlStatement(invoices[0], plays)).toBe(
     `<h1>Statement for BigCo<h1>`
