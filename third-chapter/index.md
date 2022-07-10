@@ -66,7 +66,7 @@
 
 ## 21.异曲同工的类(Alternative Classes with Different Interfaces)
 
-可以了解一下协议驱动的设计
+可以了解一下协议驱动的设计翻译
 
 ## 22.纯数据类(Data Class)
 
@@ -74,4 +74,4 @@
 
 ## 33.被拒绝的遗赠(Refused Bequest)
 
-
+继承的时候,父类的东西最好都有用
