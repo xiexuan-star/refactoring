@@ -1,8 +1,8 @@
 import { printOwing } from '../extract-function.demo.js';
 import { test, expect } from 'vitest';
 
-test('console info', () => {
-  expect(printOwing({ customer: 'test customer', orders: [{ amount: 100 }, { amount: 200 }] })).toBe(`********************
+test('extract-function', () => {
+  expect(printOwing({ customer: 'test customer', orders: [{ amount: 100 }, { amount: 200 }] })).toEqual(`********************
 *** Customer Owes ***
 ********************
 name: test customer

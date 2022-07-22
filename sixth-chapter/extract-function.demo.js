@@ -38,5 +38,3 @@ export function printOwing(invoice) {
     result += `${content}\n`;
   }
 }
-
-console.log(printOwing({ customer: 'test customer', orders: [{ amount: 100 }, { amount: 200 }] }));
