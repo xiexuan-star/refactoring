@@ -19,3 +19,5 @@
 ## 9. 函数组合成类(Combine Functions into Class)
 
 ## 10. 函数组合成变换(Combine Functions into Transform)
+
+## 11.拆分阶段(Split Phase)

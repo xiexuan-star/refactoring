@@ -7,6 +7,6 @@ test('extract-function', () => {
 ********************
 name: test customer
 amount: 300
-time: 8/21/2022
+time: 9/12/2022
 `);
 });
