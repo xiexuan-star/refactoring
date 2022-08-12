@@ -15,3 +15,7 @@
 ## 7. 变量改名(Rename Variable)
 
 ## 8. 引入参数对象(Introduce Parameter Object)
+
+## 9. 函数组合成类(Combine Functions into Class)
+
+## 10. 函数组合成变换(Combine Functions into Transform)
