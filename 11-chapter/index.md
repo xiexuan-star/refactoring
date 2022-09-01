@@ -25,3 +25,19 @@
 ## 6.以参数取代查询(Replace Query with Parameter)
 
 当函数中引用一些全局变量时，尽量让函数不去负责处理这些引用关系，即抽离到参数当中
+
+## 7.移除设值函数(Remove Setting Method) 
+
+移除设值函数以表达不希望此值被修改的意图
+
+## 8.以工厂函数取代构造函数(Replace Constructor with Factory Function)
+
+## 9.以命令取代函数(Replace Function with Command)
+
+此处的命令指代的是命令对象，由这个对象提供函数的调用方法(execute or call .etc)
+
+一个常见的场景就是拆解复杂函数，将函数中的局部变量转换为实例字段，之后就可以随意进行拆解
+
+## 10.以函数取代命令(Replace Command with Function)
+
+大部分情况实际上没必要使用到命令对象
